@@ -23,7 +23,6 @@ function createApi({store}){
 
 	api.use(bodyParser.json());
 
-	//routes
 	api.post("/sign-in", signIn({store}));
 	api.post("/add-quiz", valUser({jwt}), valQuiz(), addQuiz({store}));
 	api.post("/add-answers", valUser({jwt}), valAnswers(), addAnswers({store}));
