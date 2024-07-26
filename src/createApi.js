@@ -17,10 +17,12 @@ const {getAnswers} = require("./routes/getAnswers");
 const {getQuizzes} = require("./routes/getQuizzes");
 const {getUserData} = require("./routes/getUserData");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
 function createApi({store}){
 	const api = express();
 
+	api.use(cors());
 	api.use(bodyParser.json());
 
 	api.post("/sign-in", signIn({store}));
