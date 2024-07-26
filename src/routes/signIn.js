@@ -12,7 +12,7 @@ async function handleRequest(params){
 	const {req, res, store} = params;
 
 	//check if credentials are provided
-	if(!req.body || !req.body.password || !req.body.name && !req.body.email){
+	if(!req.body || !req.body.password || !req.body.name){
 		return res.status(400).json({success: false, msg: "Some credentials are missed."});
 	}
 
@@ -20,7 +20,7 @@ async function handleRequest(params){
 	const query = {
 		$or: [
 			{name: req.body.name},
-			{email: req.body.email}
+			{email: req.body.name}
 		],
 		password: req.body.password
 	};
