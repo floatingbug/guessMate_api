@@ -23,6 +23,10 @@ function createApi({store}){
 
 	api.use(bodyParser.json());
 
+	api.get("/", (req, res) => {
+		res.json({hallo: "Hello there :)"});
+	});
+
 	api.post("/sign-in", signIn({store}));
 	api.post("/add-quiz", valUser({jwt}), valQuiz(), addQuiz({store}));
 	api.post("/add-answers", valUser({jwt}), valAnswers(), addAnswers({store}));

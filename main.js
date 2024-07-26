@@ -9,4 +9,4 @@ const server = http.createServer();
 server.on("request", api);
 
 
-server.listen(3000);
+server.listen(process.env.PORT);
