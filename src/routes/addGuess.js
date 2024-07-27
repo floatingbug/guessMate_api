@@ -46,6 +46,7 @@ async function handleRequest(params){
 	try{
 		const doc = {
 			quizId: quiz.quizId,
+			quizTitle: quiz.quizTitle,
 			answersId: req.body.answersId,
 			guessId: randomUUID(),
 			guesserId: req.user.userId,

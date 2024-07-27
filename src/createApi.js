@@ -21,8 +21,11 @@ const cors = require("cors");
 
 function createApi({store}){
 	const api = express();
+	const corsOptions = {
+		exposedHeaders: ["Authorization"]
+	};
 
-	api.use(cors());
+	api.use(cors(corsOptions));
 	api.use(bodyParser.json());
 
 	api.post("/sign-in", signIn({store}));
