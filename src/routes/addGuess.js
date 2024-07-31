@@ -41,6 +41,18 @@ async function handleRequest(params){
 	}
 	
 	//check if user has allready guessed the answers from the user
+	try{
+		const query = {
+			guesserId: req.user.userId
+		};
+		
+		const result = await store.getGuesses(query);
+		
+		if(result.length > 0) return res.status(400).json({success: false, msg: "You have guessed the answers allready."});
+	}
+	catch(err){
+		return handleServerError({err, res});
+	}
 
 	//add guess
 	try{

@@ -14,6 +14,7 @@ function createStore(){
 		addGuess,
 		getUser,
 		getQuizzes,
+		getAllQuizzes,
 		getAnswers,
 		getGuesses,
 		deleteQuiz,
@@ -142,6 +143,26 @@ async function getQuizzes(query){
 		const result = await quizzesCollection.find(query);
 		const quizzes = await result.toArray();
 		
+		return quizzes;
+	}
+	catch(err){
+		throw err;
+	}
+	finally{
+		await this.client.close();
+	}
+}
+
+async function getAllQuizzes(){
+	const quizzesCollection = this.db.collection("quizzes");
+
+	try{
+		await this.client.connect();
+		const result = await quizzesCollection.find();
+		const quizzes = await result.toArray();
+
+		if(quizzes.length < 1) return null;
+
 		return quizzes;
 	}
 	catch(err){

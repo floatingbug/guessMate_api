@@ -46,7 +46,7 @@ async function handleRequest(params){
 	}
 
 	//add answers to userData.guesses
-	if(userData.answers.length > 0){
+	if(userData.guesses.length > 0){
 		const answersIds = userData.guesses.map(g => ({answersId: g.answersId}));
 		let answers = null;
 
