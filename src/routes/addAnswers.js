@@ -29,6 +29,7 @@ async function handleRequest(params){
 	//check if user allready answerd the quiz
 	try{
 		const query = {
+			quizId: req.body.quizId,
 			quizTakerId: req.user.userId
 		};
 
