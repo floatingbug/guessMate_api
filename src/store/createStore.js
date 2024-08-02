@@ -14,7 +14,9 @@ function createStore(){
 		addGuess,
 		getUser,
 		getQuizzes,
+		getAllQuizzes,
 		getAnswers,
+		getAllAnswers,
 		getGuesses,
 		deleteQuiz,
 		deleteAnswers,
@@ -152,6 +154,26 @@ async function getQuizzes(query){
 	}
 }
 
+async function getAllQuizzes(){
+	const quizzesCollection = this.db.collection("quizzes");
+
+	try{
+		await this.client.connect();
+		const result = await quizzesCollection.find();
+		const quizzes = await result.toArray();
+
+		if(quizzes.length < 1) return null;
+
+		return quizzes;
+	}
+	catch(err){
+		throw err;
+	}
+	finally{
+		await this.client.close();
+	}
+}
+
 async function getAnswers(query){
 	const answersCollection = this.db.collection("answers");
 	
@@ -162,6 +184,25 @@ async function getAnswers(query){
 		const answers = await result.toArray();
 
 		return answers
+	}
+	catch(err){
+		throw err;
+	}
+	finally{
+		await this.client.close();
+	}
+}
+
+async function getAllAnswers(){
+	const answersCollection = this.db.collection("answers");
+
+	try{
+		await this.client.connect();
+
+		const result = await answersCollection.find();
+		const answers = await result.toArray();
+
+		return answers;
 	}
 	catch(err){
 		throw err;

@@ -3,7 +3,7 @@ json=$(cat << EOF
 	"quizTitle": "This is the quiz title",
 	"quiz": [
 		{
-			"question1": "question 1",
+			"question": "question 1",
 			"answers": [
 				"answer 1",
 				"answer 2",
@@ -12,7 +12,7 @@ json=$(cat << EOF
 			]
 		},
 		{
-			"question2": "question 1",
+			"question": "question 1",
 			"answers": [
 				"answer 1",
 				"answer 2",
@@ -21,7 +21,7 @@ json=$(cat << EOF
 			]
 		},
 		{
-			"question3": "question 1",
+			"question": "question 1",
 			"answers": [
 				"answer 1",
 				"answer 2",
@@ -30,7 +30,7 @@ json=$(cat << EOF
 			]
 		},
 		{
-			"question4": "question 1",
+			"question": "question 1",
 			"answers": [
 				"answer 1",
 				"answer 2",

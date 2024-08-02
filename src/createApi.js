@@ -15,14 +15,19 @@ const {deleteGuesses} = require("./routes/deleteGuesses");
 const {getGuesses} = require("./routes/getGuesses");
 const {getAnswers} = require("./routes/getAnswers");
 const {getQuizzes} = require("./routes/getQuizzes");
+const {getAllQuizzes} = require("./routes/getAllQuizzes");
+const {getAllAnswers} = require("./routes/getAllAnswers");
 const {getUserData} = require("./routes/getUserData");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
 function createApi({store}){
 	const api = express();
+	const corsOptions = {
+		exposedHeaders: ["Authorization"]
+	};
 
-	api.use(cors());
+	api.use(cors(corsOptions));
 	api.use(bodyParser.json());
 
 	api.get("/", (req, res) => {
@@ -41,6 +46,8 @@ function createApi({store}){
 	api.post("/get-guesses", getGuesses({store}));
 	api.post("/get-answers", getAnswers({store}));
 	api.post("/get-quizzes", getQuizzes({store}));
+	api.get("/get-all-quizzes", valUser({jwt}), getAllQuizzes({store}));
+	api.get("/get-all-answers", valUser({jwt}), getAllAnswers({store}));
 	api.get("/get-user-data", valUser({jwt}), getUserData({store}));
 
 	return api;

@@ -31,6 +31,9 @@ async function handleRequest(params){
 			res.status(400);
 			return res.json({success: false, msg: "Name, email or password incorrect."});
 		}
+		if(!user.isEmailConfirmed){
+			return res.status(400).json({success: false, msg: "Please confirm your email first."});
+		}
 	}
 	catch(err){
 		return handleServerError({res, err});

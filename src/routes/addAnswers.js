@@ -26,6 +26,20 @@ async function handleRequest(params){
 		return handleServerError({err, res});
 	}
 
+	//check if user allready answerd the quiz
+	try{
+		const query = {
+			quizId: req.body.quizId,
+			quizTakerId: req.user.userId
+		};
+
+		const answer = await store.getAnswers(query);
+		if(answer.length > 0) return res.status(400).json({success: false, msg: "You have answerd the quiz allready."});
+	}
+	catch(err){
+		return handleServerError({err, res});
+	}
+
 	try{
 		const doc = {
 			quizId: req.body.quizId,

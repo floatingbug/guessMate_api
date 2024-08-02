@@ -28,7 +28,7 @@ async function handleRequest(params){
 		
 		if(quizzes.length < 1) return res.status(400).json({success: false, msg: "No quizzes found."});
 		
-		res.status(200).json({success: false, msg: "Quizzes have been sent", data: quizzes});
+		res.status(200).json({success: true, msg: "Quizzes have been sent", data: quizzes});
 	}
 	catch(err){
 		return handleServerError({err, res});
