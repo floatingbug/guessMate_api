@@ -24,7 +24,7 @@ async function handleRequest(params){
 			return handleServerError({res, err});
 		}
 
-		return res.redirect(`${process.env.CLIENT_URL}/sign-in`);
+		return res.redirect(`${process.env.CLIENT_URL}`);
 	}
 	
 	//validate credentials
