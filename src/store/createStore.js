@@ -21,6 +21,7 @@ function createStore(){
 		deleteQuiz,
 		deleteAnswers,
 		deleteGuesses,
+		deleteUser,
 	};
 
 	return store;
@@ -42,7 +43,7 @@ async function confirmEmail(filter){
 		await this.client.connect();
 		const result = await users.updateOne(filter, doc);
 
-		if(result.modifiedCount < 1) throw new Error("Fail to confirm email. Mongod returned modifiedCount with less than 2");
+		if(result.modifiedCount < 1) throw new Error("Fail to confirm email. Mongod returned modifiedCount with less than 1");
 	}
 	catch(err){
 		throw err;
@@ -325,6 +326,57 @@ async function deleteGuesses(doc){
 	}
 
 	return true;
+}
+
+async function deleteUser({quizzesDoc, guessesDoc, answersDoc, usersDoc}){
+	const userCollection = this.db.collection("users");
+	const quizzesCollection = this.db.collection("quizzes");
+	const answersCollection = this.db.collection("answers");
+	const guessesCollection = this.db.collection("guesses");
+	const session = this.client.startSession();
+
+	try{
+		await this.client.connect();
+		session.startTransaction();
+		
+		const quizzesResult = await quizzesCollection.deleteMany(quizzesDoc);
+
+		if(!quizzesResult.acknowledged){
+			session.abortTransaction();
+			return null;
+		}
+
+		const answersResult = await answersCollection.deleteMany(answersDoc);
+
+		if(!answersResult.acknowledged){
+			session.abortTransaction();
+			return null;
+		}
+
+		const guessesResult = await guessesCollection.deleteMany(guessesDoc);
+
+		if(!guessesResult.acknowledged){
+			session.abortTransaction();
+			return null;
+		}
+
+		const usersResult = await userCollection.deleteOne(usersDoc);
+
+		if(!usersResult.acknowledged){
+			session.abortTransaction();
+			return null;
+		}
+		
+		await session.commitTransaction();
+
+		return true;
+	}
+	catch(err){
+		throw err;
+	}
+	finally{
+		await this.client.close();
+	}
 }
 
 

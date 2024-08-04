@@ -12,6 +12,7 @@ const {valGuess}  = require("./middleware/valGuess");
 const {deleteQuiz} = require("./routes/deleteQuiz");
 const {deleteAnswers} = require("./routes/deleteAnswers");
 const {deleteGuesses} = require("./routes/deleteGuesses");
+const {deleteUser} = require("./routes/deleteUser");
 const {getGuesses} = require("./routes/getGuesses");
 const {getAnswers} = require("./routes/getAnswers");
 const {getQuizzes} = require("./routes/getQuizzes");
@@ -30,10 +31,6 @@ function createApi({store}){
 	api.use(cors(corsOptions));
 	api.use(bodyParser.json());
 
-	api.get("/", (req, res) => {
-		res.json({hallo: "Hello there :)"});
-	});
-
 	api.post("/guessmateapi/sign-in", signIn({store}));
 	api.post("/guessmateapi/add-quiz", valUser({jwt}), valQuiz(), addQuiz({store}));
 	api.post("/guessmateapi/add-answers", valUser({jwt}), valAnswers(), addAnswers({store}));
@@ -43,6 +40,7 @@ function createApi({store}){
 	api.delete("/guessmateapi/delete-quiz", valUser({jwt}),  deleteQuiz({store}));
 	api.delete("/guessmateapi/delete-answers", valUser({jwt}), deleteAnswers({store}));
 	api.delete("/guessmateapi/delete-guesses", valUser({jwt}), deleteGuesses({store}));
+	api.delete("/guessmateapi/delete-user", valUser({jwt}), deleteUser({store}));
 	api.post("/guessmateapi/get-guesses", getGuesses({store}));
 	api.post("/guessmateapi/get-answers", getAnswers({store}));
 	api.post("/guessmateapi/get-quizzes", getQuizzes({store}));
