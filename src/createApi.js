@@ -34,21 +34,21 @@ function createApi({store}){
 		res.json({hallo: "Hello there :)"});
 	});
 
-	api.post("/sign-in", signIn({store}));
-	api.post("/add-quiz", valUser({jwt}), valQuiz(), addQuiz({store}));
-	api.post("/add-answers", valUser({jwt}), valAnswers(), addAnswers({store}));
-	api.post("/add-guess", valUser({jwt}), valGuess(), addGuess({store}));
-	api.post("/add-user", addUser({store}));
-	api.get("/add-user", addUser({store}));
-	api.delete("/delete-quiz", valUser({jwt}),  deleteQuiz({store}));
-	api.delete("/delete-answers", valUser({jwt}), deleteAnswers({store}));
-	api.delete("/delete-guesses", valUser({jwt}), deleteGuesses({store}));
-	api.post("/get-guesses", getGuesses({store}));
-	api.post("/get-answers", getAnswers({store}));
-	api.post("/get-quizzes", getQuizzes({store}));
-	api.get("/get-all-quizzes", valUser({jwt}), getAllQuizzes({store}));
-	api.get("/get-all-answers", valUser({jwt}), getAllAnswers({store}));
-	api.get("/get-user-data", valUser({jwt}), getUserData({store}));
+	api.post("/guessmateapi/sign-in", signIn({store}));
+	api.post("/guessmateapi/add-quiz", valUser({jwt}), valQuiz(), addQuiz({store}));
+	api.post("/guessmateapi/add-answers", valUser({jwt}), valAnswers(), addAnswers({store}));
+	api.post("/guessmateapi/add-guess", valUser({jwt}), valGuess(), addGuess({store}));
+	api.post("/guessmateapi/add-user", addUser({store}));
+	api.get("/guessmateapi/add-user", addUser({store}));
+	api.delete("/guessmateapi/delete-quiz", valUser({jwt}),  deleteQuiz({store}));
+	api.delete("/guessmateapi/delete-answers", valUser({jwt}), deleteAnswers({store}));
+	api.delete("/guessmateapi/delete-guesses", valUser({jwt}), deleteGuesses({store}));
+	api.post("/guessmateapi/get-guesses", getGuesses({store}));
+	api.post("/guessmateapi/get-answers", getAnswers({store}));
+	api.post("/guessmateapi/get-quizzes", getQuizzes({store}));
+	api.get("/guessmateapi/get-all-quizzes", valUser({jwt}), getAllQuizzes({store}));
+	api.get("/guessmateapi/get-all-answers", valUser({jwt}), getAllAnswers({store}));
+	api.get("/guessmateapi/get-user-data", valUser({jwt}), getUserData({store}));
 
 	return api;
 }
