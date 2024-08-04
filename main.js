@@ -11,4 +11,6 @@ server.on("request", api);
 
 
 
-server.listen(port);
+server.listen(port, ()=> {
+	console.log(`Server is running on port: ${port}`);
+});

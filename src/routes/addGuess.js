@@ -43,7 +43,8 @@ async function handleRequest(params){
 	//check if user has allready guessed the answers from the user
 	try{
 		const query = {
-			guesserId: req.user.userId
+			guesserId: req.user.userId,
+			answersId: req.body.answersId
 		};
 		
 		const result = await store.getGuesses(query);
